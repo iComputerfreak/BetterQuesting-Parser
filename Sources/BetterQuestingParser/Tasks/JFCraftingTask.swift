@@ -8,22 +8,22 @@
 import Foundation
 
 /// Represents task where the player has to craft specific items
-class JFCraftingTask: JFTask {
+public class JFCraftingTask: JFTask {
     
     /// Whether the items only have to be a partial match
-    let partialMatch: Bool
+    public let partialMatch: Bool
     
     /// Whether NBT tags should be ignored
-    let ignoreNBT: Bool
+    public let ignoreNBT: Bool
     
     /// The list of items required
-    let requiredItems: [JFItem]
+    public let requiredItems: [JFItem]
     
-    override var description: String {
+    public override var description: String {
         return "Crafting task with \(requiredItems.count) items (id \(taskID))"
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         partialMatch = try container.decode(Bool.self, forKey: .partialMatch)

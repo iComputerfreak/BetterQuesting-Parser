@@ -8,19 +8,19 @@
 import Foundation
 
 /// Represents an experience reward
-class JFXPReward: JFReward {
+public class JFXPReward: JFReward {
     
     /// The amount of experience
-    let amount: Int
+    public let amount: Int
     
     /// Whether the amount is specified in levels
-    let isLevels: Bool
+    public let isLevels: Bool
     
-    override var description: String {
+    public override var description: String {
         return "XP reward with \(amount)\(isLevels ? "L" : "") XP (id \(rewardID))"
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         amount = try container.decode(Int.self, forKey: .amount)

@@ -8,10 +8,10 @@
 import Foundation
 
 /// Represents an container, containing only the BetterQuesting properties
-struct JFProperties: Decodable {
+public struct JFProperties: Decodable {
     
     /// The BetterQuesting properties
-    let betterQuestingProperties: JFBetterQuestingProperties
+    public let betterQuestingProperties: JFBetterQuestingProperties
     
     private enum CodingKeys: String, CodingKey {
         case betterQuestingProperties = "betterquesting"
@@ -19,53 +19,53 @@ struct JFProperties: Decodable {
 }
 
 /// Represents a set of properties for a specific quest
-struct JFBetterQuestingProperties: Decodable {
+public struct JFBetterQuestingProperties: Decodable {
     
     
     /// The Sound name used when a quest is updated (e.g. `random.levelup`)
-    let updateSound: String
+    public let updateSound: String
     
     /// The Sound name used when a quest is completed (e.g. `random.levelup`)
-    let completionSound: String
+    public let completionSound: String
     
     /// The task logic (`AND`, `OR`, `NAND`, `NOR`, `XOR` or `XNOR`)
-    let taskLogic: String
+    public let taskLogic: String
     
     /// The quest logic (`AND`, `OR`, `NAND`, `NOR`, `XOR` or `XNOR`)
-    let questLogic: String
+    public let questLogic: String
     
     /// Whether the reward should be given to only one party member
-    let partySingleReward: Bool
+    public let partySingleReward: Bool
     
     /// Whether this quest is a main quest
-    let isMain: Bool
+    public let isMain: Bool
     
     
-    let simultaneous: Bool
+    public let simultaneous: Bool
     
     /// The cooldown for repeatable quests in ticks (or -1 if the quest should not be repeatable)
-    let repeatTime: Int
+    public let repeatTime: Int
     
     
-    let globalShare: Bool
+    public let globalShare: Bool
     
     
-    let lockedProgress: Bool
+    public let lockedProgress: Bool
     
     
-    let isSilent: Bool
+    public let isSilent: Bool
     
     /// Whether the quest should be automatically claimed when completed
-    let autoClaim: Bool
+    public let autoClaim: Bool
     
     /// The name of the quest
-    let name: String
+    public let name: String
     
     /// The description of the quest
-    let description: String
+    public let description: String
     
     /// The item used as icon for the quest
-    let icon: JFItem
+    public let icon: JFItem
     
     
     private enum CodingKeys: String, CodingKey {

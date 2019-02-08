@@ -8,19 +8,19 @@
 import Foundation
 
 /// Represents a list of rewards
-class JFRewardList: Decodable, Sequence {
+public class JFRewardList: Decodable, Sequence {
     
-    typealias Iterator = IndexingIterator<[JFReward]>
+    public typealias Iterator = IndexingIterator<[JFReward]>
     
     /// The list of rewards
-    let rewards: [JFReward]
+    public let rewards: [JFReward]
     
     /// Creates a new JFRewardList containing a list of JFReward subclasses read from the given decoder
     /// Decodes every task in the matching subclass
     ///
     /// - Parameter decoder: The decoder to read from
     /// - Throws: if reading from the decoder fails, or if the data read is corrupted or otherwise invalid.
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         // decoder contains the container with the array of tasks (used only for getting the type)
         var rewardsArrayForType = try decoder.unkeyedContainer()
         var rewards = [JFReward]()
@@ -69,7 +69,7 @@ class JFRewardList: Decodable, Sequence {
         case command = "bq_standard:command"
     }
     
-    func makeIterator() -> JFRewardList.Iterator {
+    public func makeIterator() -> JFRewardList.Iterator {
         return rewards.makeIterator()
     }
     

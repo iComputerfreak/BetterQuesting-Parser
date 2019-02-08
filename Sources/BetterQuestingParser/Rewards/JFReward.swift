@@ -8,10 +8,10 @@
 import Foundation
 
 /// Represents a Reward
-class JFReward: Decodable, CustomStringConvertible {
+public class JFReward: Decodable, CustomStringConvertible {
     
     /// The ID of the reward inside the quest
-    let rewardID: Int
+    public let rewardID: Int
     
     /// The type of reward
     ///
@@ -20,13 +20,13 @@ class JFReward: Decodable, CustomStringConvertible {
     /// - bq_standard:xp
     /// - bq_standard:choice
     /// - bq_standard:command
-    let type: String
+    public let type: String
     
-    var description: String {
+    public var description: String {
         return "Generic reward with type \(type) (id \(rewardID))"
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         rewardID = try container.decode(Int.self, forKey: .rewardID)
         type = try container.decode(String.self, forKey: .type)

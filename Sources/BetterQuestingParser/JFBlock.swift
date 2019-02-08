@@ -8,22 +8,22 @@
 import Foundation
 
 /// Represents one or more physical block in the world
-struct JFBlock: Decodable {
+public struct JFBlock: Decodable {
     
     /// The ID of the block (e.g. `minecraft:stone`)
-    let blockID: String
+    public let blockID: String
     
     /// The metadata
-    let meta: Int
+    public let meta: Int
     
     /// The NBT data of the block
-    let nbt: JFNBT
+    public let nbt: JFNBT
     
     /// The amount of blocks
-    let amount: Int
+    public let amount: Int
     
     /// The ore dictionary name
-    let oreDict: String
+    public let oreDict: String
     
     private enum CodingKeys: String, CodingKey {
         case blockID

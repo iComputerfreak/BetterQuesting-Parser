@@ -8,13 +8,13 @@
 import Foundation
 
 /// Represents a parser for parsing a BetterQuesting JSON file
-struct QuestParser {
+public struct QuestParser {
     
     /// Parses the BetterQuesting 'DefaultQuests.json'
     ///
     /// - Parameter file: The path to the location of 'DefaultQuests.json'
     /// - Returns: The data parsed as an array of JFQuest items
-    static func getQuests(file: String) -> [JFQuest]? {
+    public static func getQuests(file: String) -> [JFQuest]? {
         
         do {
             // Read the file as Data (using utf8)

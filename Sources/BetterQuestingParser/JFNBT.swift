@@ -8,9 +8,8 @@
 import Foundation
 
 /// Represents a set of NBT tags
-class JFNBT: Codable {
-    
-    required init(from decoder: Decoder) throws {
+public class JFNBT: Codable {
+    public required init(from decoder: Decoder) throws {
         
     }
 }

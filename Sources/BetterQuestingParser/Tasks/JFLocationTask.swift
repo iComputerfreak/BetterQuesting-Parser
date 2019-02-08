@@ -8,37 +8,37 @@
 import Foundation
 
 /// Represents task where the player has to travel to a specific location
-class JFLocationTask: JFTask {
+public class JFLocationTask: JFTask {
     
     /// The name of the location
-    let name: String
+    public let name: String
     
     /// The x-coordinate of the location
-    let posX: Int
+    public let posX: Int
     
     /// The y-coordinate of the location
-    let posY: Int
+    public let posY: Int
     
     /// The z-coordinate of the location
-    let posZ: Int
+    public let posZ: Int
     
     /// The dimension ID of the location
-    let dimension: Int
+    public let dimension: Int
     
     /// How far the player can be away from the location
-    let range: Int
+    public let range: Int
     
     /// Whether the location is visible
-    let visible: Bool
+    public let visible: Bool
     
     
-    let hideInfo: Bool
+    public let hideInfo: Bool
     
-    override var description: String {
+    public override var description: String {
         return "Location task with name '\(name)' (id \(taskID))"
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         name = try container.decode(String.self, forKey: .name)

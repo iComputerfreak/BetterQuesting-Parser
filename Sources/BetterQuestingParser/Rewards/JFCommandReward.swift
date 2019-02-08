@@ -8,22 +8,22 @@
 import Foundation
 
 /// Represents a reward where a specific command gets executed
-class JFCommandReward: JFReward {
+public class JFCommandReward: JFReward {
     
     /// The command that will be executed (including the `/`)
-    let command: String
+    public let command: String
     
     /// Whether the command should be hidden from the user
-    let hideCommand: Bool
+    public let hideCommand: Bool
     
     /// Whether the command should be executed by the player (otherwise from the console)
-    let viaPlayer: Bool
+    public let viaPlayer: Bool
     
-    override var description: String {
+    public override var description: String {
         return "Command reward with command '\(command)' (id \(rewardID))"
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         command = try container.decode(String.self, forKey: .command)

@@ -8,8 +8,8 @@
 import Foundation
 
 /// Represents a task where the player has to click a checkbox
-class JFCheckboxTask: JFTask {
-    override var description: String {
+public class JFCheckboxTask: JFTask {
+    public override var description: String {
         return "Checkbox task (id \(taskID))"
     }
 }

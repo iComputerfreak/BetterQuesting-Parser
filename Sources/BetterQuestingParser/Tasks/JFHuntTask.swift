@@ -8,28 +8,28 @@
 import Foundation
 
 /// Represents a task where the player has to kill a specific entity
-class JFHuntTask: JFTask {
+public class JFHuntTask: JFTask {
     
     /// The entity to kill
-    let target: String
+    public let target: String
     
     /// The amount of entities to kill
-    let amount: Int
+    public let amount: Int
     
     /// Whether subtypes should count too
-    let subtypes: Bool
+    public let subtypes: Bool
     
     /// Whether NBT tags should be ignored
-    let ignoreNBT: Bool
+    public let ignoreNBT: Bool
     
     /// The NBT tags of the target
-    let targetNBT: JFNBT
+    public let targetNBT: JFNBT
     
-    override var description: String {
+    public override var description: String {
         return "Hunting task with entity type \(target) (id \(taskID))"
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         target = try container.decode(String.self, forKey: .target)

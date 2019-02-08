@@ -8,19 +8,19 @@
 import Foundation
 
 /// Represents a list of tasks
-class JFTaskList: Decodable, Sequence {
+public class JFTaskList: Decodable, Sequence {
     
-    typealias Iterator = IndexingIterator<[JFTask]>
+    public typealias Iterator = IndexingIterator<[JFTask]>
     
     /// The list of tasks
-    let tasks: [JFTask]
+    public let tasks: [JFTask]
     
     /// Creates a new JFTaskList containing a list of JFTask subclasses read from the given decoder
     /// Decodes every task in the matching subclass
     ///
     /// - Parameter decoder: The decoder to read from
     /// - Throws: if reading from the decoder fails, or if the data read is corrupted or otherwise invalid.
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         // decoder contains the container with the array of tasks
         var tasksArrayForType = try decoder.unkeyedContainer()
         var tasks = [JFTask]()
@@ -81,7 +81,7 @@ class JFTaskList: Decodable, Sequence {
         case checkbox = "bq_standard:checkbox"
     }
     
-    func makeIterator() -> JFTaskList.Iterator {
+    public func makeIterator() -> JFTaskList.Iterator {
         return tasks.makeIterator()
     }
     

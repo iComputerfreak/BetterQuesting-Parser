@@ -8,10 +8,10 @@
 import Foundation
 
 /// Represents a generic task with an ID and a type
-class JFTask: Decodable, CustomStringConvertible {
+public class JFTask: Decodable, CustomStringConvertible {
     
     /// The ID of the task inside the quest
-    let taskID: Int
+    public let taskID: Int
     
     /// The type of the task
     ///
@@ -23,9 +23,9 @@ class JFTask: Decodable, CustomStringConvertible {
     /// - bq_standard:location
     /// - bq_standard:hunt
     /// - bq_standard:checkbox
-    let type: String
+    public let type: String
     
-    var description: String {
+    public var description: String {
         return "Generic task with type \(type) (id \(taskID))"
     }
     
@@ -33,7 +33,7 @@ class JFTask: Decodable, CustomStringConvertible {
     ///
     /// - Parameter decoder: The decoder to read from
     /// - Throws: if reading from the decoder fails, or if the data read is corrupted or otherwise invalid.
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         taskID = try container.decode(Int.self, forKey: .taskID)
         type = try container.decode(String.self, forKey: .type)

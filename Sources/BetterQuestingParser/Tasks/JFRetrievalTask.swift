@@ -8,31 +8,31 @@
 import Foundation
 
 /// Represents a task where the player has to obtain or submit specific items
-class JFRetrievalTask: JFTask {
+public class JFRetrievalTask: JFTask {
     
     /// Whether the items only have to be a partial match
-    let partialMatch: Bool
+    public let partialMatch: Bool
     
     /// Whether NBT tags should be ignored
-    let ignoreNBT: Bool
+    public let ignoreNBT: Bool
     
     /// Whether the items need to be submitted instead of just obtained
-    let consume: Bool
+    public let consume: Bool
     
     /// Whether the items should only be detected all at once
-    let groupDetect: Bool
+    public let groupDetect: Bool
     
     /// Whether the items should be automatically consumed (only if consume is `true`)
-    let autoConsume: Bool
+    public let autoConsume: Bool
     
     /// The list of items required
-    let requiredItems: [JFItem]
+    public let requiredItems: [JFItem]
     
-    override var description: String {
+    public override var description: String {
         return "Retrieval (\(consume ? "" : "non-")consuming) task with \(requiredItems.count) items (id \(taskID))"
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         partialMatch = try container.decode(Bool.self, forKey: .partialMatch)
