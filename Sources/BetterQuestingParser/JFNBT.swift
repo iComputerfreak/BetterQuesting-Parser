@@ -8,7 +8,12 @@
 import Foundation
 
 /// Represents a set of NBT tags
-public class JFNBT: Codable {
+public class JFNBT: Codable, CustomStringConvertible {
+    
+    public var description: String {
+        return "NBT Tag"
+    }
+    
     public required init(from decoder: Decoder) throws {
         
     }

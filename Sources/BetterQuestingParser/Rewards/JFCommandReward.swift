@@ -20,7 +20,7 @@ public class JFCommandReward: JFReward {
     public let viaPlayer: Bool
     
     public override var description: String {
-        return "Command reward with command '\(command)' (id \(rewardID))"
+        return "\(viaPlayer ? "" : "console: ")\(command)"
     }
     
     public required init(from decoder: Decoder) throws {

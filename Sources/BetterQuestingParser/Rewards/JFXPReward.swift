@@ -17,7 +17,7 @@ public class JFXPReward: JFReward {
     public let isLevels: Bool
     
     public override var description: String {
-        return "XP reward with \(amount)\(isLevels ? "L" : "") XP (id \(rewardID))"
+        return "\(amount)\(isLevels ? " Levels of" : "") XP"
     }
     
     public required init(from decoder: Decoder) throws {

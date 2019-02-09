@@ -31,7 +31,7 @@ public class JFRewardList: Decodable, Sequence {
             // get the next task as a nested container that is keyed by the TaskTypeKey enum (only the type key matters right now)
             let reward = try rewardsArrayForType.nestedContainer(keyedBy: RewardTypeKey.self)
             // get the type of the task
-            let type = try reward.decode(RewardTypes.self, forKey: RewardTypeKey.type)
+            let type = try reward.decode(JFReward.Types.self, forKey: RewardTypeKey.type)
             
             // decode the task again (in the init methods) now with all the keys
             switch type {
@@ -54,19 +54,6 @@ public class JFRewardList: Decodable, Sequence {
     /// - type: the key that is used for the type of a reward
     private enum RewardTypeKey: String, CodingKey {
         case type = "rewardID"
-    }
-    
-    /// Contains the different reward types
-    ///
-    /// - item: A fixed item reward
-    /// - xp: An experience reward
-    /// - choice: A choice reward, where the player can choose one from a list of items
-    /// - command: A reward where a command gets executed
-    private enum RewardTypes: String, Decodable {
-        case item = "bq_standard:item"
-        case xp = "bq_standard:xp"
-        case choice = "bq_standard:choice"
-        case command = "bq_standard:command"
     }
     
     public func makeIterator() -> JFRewardList.Iterator {

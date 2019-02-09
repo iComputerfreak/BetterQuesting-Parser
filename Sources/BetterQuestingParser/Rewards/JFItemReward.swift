@@ -14,7 +14,7 @@ public class JFItemReward: JFReward {
     public let items: [JFItem]
     
     public override var description: String {
-        return "Item reward with \(items.count) items (id \(rewardID))"
+        return String(describing: items)
     }
     
     public required init(from decoder: Decoder) throws {

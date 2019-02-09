@@ -25,6 +25,11 @@ public struct JFQuest: Decodable {
     /// The properties of this quest
     public let properties: JFProperties
     
+    /// Contains the name stored in the betterQuestingProperties
+    public var name: String {
+        return properties.betterQuestingProperties.name
+    }
+    
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameter decoder: The decoder to read from

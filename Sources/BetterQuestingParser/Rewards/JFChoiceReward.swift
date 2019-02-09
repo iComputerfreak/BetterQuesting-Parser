@@ -14,7 +14,7 @@ public class JFChoiceReward: JFReward {
     public let items: [JFItem]
     
     public override var description: String {
-        return "Choice reward with \(items.count) choices (id \(rewardID))"
+        return "Choice: \(String(describing: items))"
     }
     
     public required init(from decoder: Decoder) throws {
