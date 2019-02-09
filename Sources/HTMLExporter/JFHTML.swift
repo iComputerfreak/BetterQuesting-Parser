@@ -17,13 +17,16 @@ public class JFHTML: CustomStringConvertible {
         return html
     }
     
-    public init() {
+    public init(head: [String] = []) {
         append("<html>")
         increaseIndent()
         append("<head>")
         increaseIndent()
         // Start HEAD info
         append("<title>Quests</title>")
+        for h in head {
+            append(h)
+        }
         // End HEAD info
         decreaseIndent()
         append("</head>")
@@ -69,18 +72,27 @@ public class JFHTML: CustomStringConvertible {
         append("</table>")
     }
     
-    public func addTableRow(_ data: [String]) {
+    public func addTableRow(_ data: [String], classes: [String]? = nil) {
+        precondition(classes == nil || data.count == classes!.count)
         append("<tr>")
         increaseIndent()
-        for d in data {
+        for i in 0..<data.count {
+            let d = data[i]
+            var tdWithClass = ""
+            if let c = classes?[i] {
+                tdWithClass = "<td class=\"\(c)\">"
+            } else {
+                tdWithClass = "<td>"
+            }
+            
             if d.contains("\n") {
-                append("<td>")
+                append(tdWithClass)
                 increaseIndent()
                 append(d)
                 decreaseIndent()
                 append("</td>")
             } else {
-                append("<td>\(d)</td>")
+                append("\(tdWithClass)\(d)</td>")
             }
         }
         decreaseIndent()

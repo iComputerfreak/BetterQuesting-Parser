@@ -24,7 +24,7 @@ public struct HTMLBuilder {
         // Extra column for choice?
         // NBT Column
         
-        let html = JFHTML()
+        let html = JFHTML(head: ["<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">"])
         
         html.openTable(["Amount", "Reward", "Quest Name", "Chapter", "NBT", "Type"])
         
@@ -32,11 +32,13 @@ public struct HTMLBuilder {
             for reward in quest.rewards {
                 if let itemReward = reward as? JFItemReward {
                     for item in itemReward.items {
-                        html.addTableRow([item.amount.description, item.description, quest.name, "-", item.nbt?.description ?? "", "Item"])
+                        html.addTableRow([item.amount.description, item.description, quest.name, "-", item.nbt?.description ?? "", "Item"],
+                                         classes: ["amount", "item", "name", "chapter", "nbt", "type"])
                     }
                 } else if let choiceReward = reward as? JFChoiceReward {
                     for item in choiceReward.items {
-                        html.addTableRow([item.amount.description, item.description, quest.name, "-", item.nbt?.description ?? "", "Choice"])
+                        html.addTableRow([item.amount.description, item.description, quest.name, "-", item.nbt?.description ?? "", "Choice"],
+                                         classes: ["amount", "item", "name", "chapter", "nbt", "type"])
                     }
                 } else {
                     var type = ""
@@ -50,7 +52,8 @@ public struct HTMLBuilder {
                         // In case this happens in execution, the assertion will be skipped and the type will be set to the raw value
                         type = reward.type.rawValue
                     }
-                    html.addTableRow(["", reward.description, quest.name, "-", "", type])
+                    html.addTableRow(["", reward.description, quest.name, "-", "", type],
+                                     classes: ["amount", "item", "name", "chapter", "nbt", "type"])
                 }
             }
         }
