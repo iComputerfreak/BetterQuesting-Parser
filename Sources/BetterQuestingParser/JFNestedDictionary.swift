@@ -13,8 +13,8 @@ class JFNestedDictionary: Decodable, CustomStringConvertible {
     let dictionary: [String: JFNestedDictionary]?
     let rawValue: CustomStringConvertible?
     
-    var description: String {
-        return rawValue?.description ?? dictionary?.description ?? "NIL"
+    public var description: String {
+        return rawValue?.description ?? dictionary!.description
     }
     
     required init(from decoder: Decoder) throws {
@@ -41,8 +41,6 @@ class JFNestedDictionary: Decodable, CustomStringConvertible {
         }
     }
     
-    private enum CodingKeys: CodingKey {
-        
-    }
+    private enum CodingKeys: CodingKey {}
     
 }

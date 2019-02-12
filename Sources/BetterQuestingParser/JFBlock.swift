@@ -17,13 +17,30 @@ public struct JFBlock: Decodable {
     public let meta: Int
     
     /// The NBT data of the block
-    public let nbt: JFNBT
+    public let nbt: JFNBT?
     
     /// The amount of blocks
     public let amount: Int
     
     /// The ore dictionary name
     public let oreDict: String
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.blockID = try container.decode(String.self, forKey: .blockID)
+        self.meta = try container.decode(Int.self, forKey: .meta)
+        self.amount = try container.decode(Int.self, forKey: .amount)
+        self.oreDict = try container.decode(String.self, forKey: .oreDict)
+        let nbt = try container.decodeIfPresent(JFNBT.self, forKey: .nbt)
+        
+        if nbt?.data.isEmpty ?? false {
+            // Empty NBT tags are useless
+            self.nbt = nil
+        } else {
+            self.nbt = nbt
+        }
+    }
     
     private enum CodingKeys: String, CodingKey {
         case blockID

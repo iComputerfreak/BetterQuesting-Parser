@@ -26,7 +26,7 @@ public class JFMeetingTask: JFTask {
     public let ignoreNBT: Bool
     
     /// The NBT tags of the target
-    public let targetNBT: JFNBT
+    public let targetNBT: JFNBT?
     
     public override var description: String {
         return "Meeting task with \(amount) entities of type \(target) (id \(taskID))"
@@ -40,7 +40,8 @@ public class JFMeetingTask: JFTask {
         amount = try container.decode(Int.self, forKey: .amount)
         subtypes = try container.decode(Bool.self, forKey: .subtypes)
         ignoreNBT = try container.decode(Bool.self, forKey: .ignoreNBT)
-        targetNBT = try container.decode(JFNBT.self, forKey: .targetNBT)
+        let nbt = try container.decode(JFNBT.self, forKey: .targetNBT)
+        self.targetNBT = nbt.data.isEmpty ? nil : nbt
         
         try super.init(from: decoder)
     }

@@ -56,8 +56,12 @@ public class JFHTML: CustomStringConvertible {
         return lhs
     }
     
-    public func openTable(_ headers: [String]) {
-        append("<table>")
+    public func openTable(_ headers: [String], id: String? = nil) {
+        if let id = id {
+            append("<table id=\"\(id)\">")
+        } else {
+            append("<table>")
+        }
         increaseIndent()
         append("<tr>")
         increaseIndent()
