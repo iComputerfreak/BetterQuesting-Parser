@@ -8,16 +8,16 @@
 import Foundation
 
 /// Represents a dictionary with variable depths. Each value is either a String or another JFNestedDictionary
-class JFNestedDictionary: Decodable, CustomStringConvertible {
+public class JFNestedDictionary: Decodable, CustomStringConvertible {
     
-    let dictionary: [String: JFNestedDictionary]?
-    let rawValue: CustomStringConvertible?
+    public let dictionary: [String: JFNestedDictionary]?
+    public let rawValue: CustomStringConvertible?
     
     public var description: String {
         return rawValue?.description ?? dictionary!.description
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
         // This class gets a dictionary or a string

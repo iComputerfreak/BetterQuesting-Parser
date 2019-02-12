@@ -22,6 +22,7 @@ public struct JFItem: Decodable, CustomStringConvertible {
     /// The damage (or metadata)
     public let damage: Int
     
+    /// The NBT data
     public let nbt: JFNBT?
     
     public var description: String {

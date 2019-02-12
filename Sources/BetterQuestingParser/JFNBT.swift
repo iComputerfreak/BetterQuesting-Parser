@@ -10,12 +10,11 @@ import Foundation
 /// Represents a set of NBT tags
 public struct JFNBT: Decodable, CustomStringConvertible {
     
-    // To support NBT data from blockbreak tasks, override the init to check for "nbt" keys as well
-    
-    let data: [String: JFNestedDictionary]
+    /// The dictionary containing the nbt data
+    public let data: [String: JFNestedDictionary]
     
     public var description: String {
-        return description(dictionary: data)
+        return description()
     }
     
     public init(from decoder: Decoder) throws {
@@ -25,16 +24,21 @@ public struct JFNBT: Decodable, CustomStringConvertible {
     
     private enum CodingKeys: CodingKey {}
     
-    private func description(dictionary: [String: JFNestedDictionary], level: Int = 0) -> String {
-        
+    
+    /// Recursive function that creates an description for this nbt tag
+    ///
+    /// - Parameters:
+    ///   - level: The level of recursion, used to determine the spacing
+    /// - Returns: The description of this NBT tag
+    private func description(level: Int = 0) -> String {
         let spacing = Array(repeating: " ", count: level * 4).joined(separator: "")
         var desc = ""
-        for tuple in dictionary {
+        for tuple in data {
             let key = tuple.key.replacingOccurrences(of: ":[0-9]+", with: "", options: .regularExpression)
             desc += spacing + key + ": "
-            if let dict = tuple.value.dictionary {
+            if tuple.value.dictionary != nil {
                 desc += "{\n"
-                desc += description(dictionary: dict, level: level + 1)
+                desc += description(level: level + 1)
                 desc += "\n" + spacing + "}"
             } else {
                 desc += tuple.value.rawValue!.description
@@ -48,5 +52,4 @@ public struct JFNBT: Decodable, CustomStringConvertible {
         
         return desc
     }
-    
 }

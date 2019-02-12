@@ -7,11 +7,19 @@
 
 import Foundation
 
+/// Represents a set of chapter properties
 public struct JFChapterProperties: Decodable {
     
+    /// The name of the chapter
     public let name: String
+    
+    /// The background image
     public let backgroundImage: String
+    
+    /// The background size
     public let backgroundSize: Int
+    
+    /// The description of this chapter
     public let description: String
     
     public init(from decoder: Decoder) throws {
