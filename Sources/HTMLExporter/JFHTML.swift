@@ -18,6 +18,7 @@ public class JFHTML: CustomStringConvertible {
     }
     
     public init(head: [String] = []) {
+        append("<!DOCTYPE html>")
         append("<html>")
         increaseIndent()
         append("<head>")

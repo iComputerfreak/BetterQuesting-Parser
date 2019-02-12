@@ -20,27 +20,34 @@ public struct HTMLBuilder {
     
     public func createRewardsSummary() -> String {
         
-        // TODO: Export sorted after rewards
-        // Extra column for choice?
-        // NBT Column
-        
         let html = JFHTML(head: ["<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">"])
         
         html.openTable(["Amount", "Reward", "Quest Name", "Chapter", "NBT", "Type"])
+        
+        var table = [[String]]()
         
         for quest in quests {
             for reward in quest.rewards {
                 if let itemReward = reward as? JFItemReward {
                     for item in itemReward.items {
-                        html.addTableRow([item.amount.description, item.description, quest.name, "-", item.nbt?.description ?? "", "Item"],
-                                         classes: ["amount", "item", "name", "chapter", "nbt", "type"])
+                        table.append([item.amount.description,
+                                          item.description,
+                                          quest.properties.name,
+                                          quest.chapter?.properties.name ?? "-",
+                                          item.nbt?.description ?? "",
+                                          "Item"])
                     }
                 } else if let choiceReward = reward as? JFChoiceReward {
                     for item in choiceReward.items {
-                        html.addTableRow([item.amount.description, item.description, quest.name, "-", item.nbt?.description ?? "", "Choice"],
-                                         classes: ["amount", "item", "name", "chapter", "nbt", "type"])
+                        table.append([item.amount.description,
+                                          item.description,
+                                          quest.properties.name,
+                                          quest.chapter?.properties.name ?? "-",
+                                          item.nbt?.description ?? "",
+                                          "Choice"])
                     }
                 } else {
+                    // Set human readable type
                     var type = ""
                     if reward.type == .xp {
                         type = "XP"
@@ -52,10 +59,24 @@ public struct HTMLBuilder {
                         // In case this happens in execution, the assertion will be skipped and the type will be set to the raw value
                         type = reward.type.rawValue
                     }
-                    html.addTableRow(["", reward.description, quest.name, "-", "", type],
-                                     classes: ["amount", "item", "name", "chapter", "nbt", "type"])
+                    
+                    table.append(["",
+                                  reward.description,
+                                  quest.properties.name,
+                                  quest.chapter?.properties.name ?? "-",
+                                  "",
+                                  type])
                 }
             }
+        }
+        
+        // Sort after reward name
+        table.sort { (line1: [String], line2: [String]) -> Bool in
+            return line1[1].compare(line2[1]) == .orderedAscending
+        }
+        
+        for line in table {
+            html.addTableRow(line, classes: ["amount", "item", "name", "chapter", "nbt", "type"])
         }
         
         html.closeTable()

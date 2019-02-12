@@ -10,18 +10,6 @@ import Foundation
 /// Represents an container, containing only the BetterQuesting properties
 public struct JFProperties: Decodable {
     
-    /// The BetterQuesting properties
-    public let betterQuestingProperties: JFBetterQuestingProperties
-    
-    private enum CodingKeys: String, CodingKey {
-        case betterQuestingProperties = "betterquesting"
-    }
-}
-
-/// Represents a set of properties for a specific quest
-public struct JFBetterQuestingProperties: Decodable {
-    
-    
     /// The Sound name used when a quest is updated (e.g. `random.levelup`)
     public let updateSound: String
     
@@ -67,6 +55,30 @@ public struct JFBetterQuestingProperties: Decodable {
     /// The item used as icon for the quest
     public let icon: JFItem
     
+    public init(from decoder: Decoder) throws {
+        let bqContainer = try decoder.container(keyedBy: BQCodingKeys.self)
+        let container = try bqContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: BQCodingKeys.betterQuestingProperties)
+        
+        self.updateSound = try container.decode(String.self, forKey: .updateSound)
+        self.completionSound = try container.decode(String.self, forKey: .completionSound)
+        self.taskLogic = try container.decode(String.self, forKey: .taskLogic)
+        self.questLogic = try container.decode(String.self, forKey: .questLogic)
+        self.partySingleReward = try container.decode(Bool.self, forKey: .partySingleReward)
+        self.isMain = try container.decode(Bool.self, forKey: .isMain)
+        self.simultaneous = try container.decode(Bool.self, forKey: .simultaneous)
+        self.repeatTime = try container.decode(Int.self, forKey: .repeatTime)
+        self.globalShare = try container.decode(Bool.self, forKey: .globalShare)
+        self.lockedProgress = try container.decode(Bool.self, forKey: .lockedProgress)
+        self.isSilent = try container.decode(Bool.self, forKey: .isSilent)
+        self.autoClaim = try container.decode(Bool.self, forKey: .autoClaim)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.description = try container.decode(String.self, forKey: .description)
+        self.icon = try container.decode(JFItem.self, forKey: .icon)
+    }
+    
+    private enum BQCodingKeys: String, CodingKey {
+        case betterQuestingProperties = "betterquesting"
+    }
     
     private enum CodingKeys: String, CodingKey {
         case updateSound = "snd_update"

@@ -37,9 +37,34 @@ public struct QuestParser {
             // Transform the JSON Data back to normal data for the JSONDecoder
             let databaseData = try JSONSerialization.data(withJSONObject: database, options: [])
             
+            // The array of quests (under the 'questDatabase' key)
+            guard let questLines = json["questLines"] else {
+                // questDatabase key not found
+                throw NSError(domain: "JSON Data is not a valid BetterQuesting database", code: 5, userInfo: nil)
+            }
+            // Transform the JSON Data back to normal data for the JSONDecoder
+            let questLinesData = try JSONSerialization.data(withJSONObject: questLines, options: [])
+            
             print("Decoding Quests...")
             let quests: [JFQuest] = try JSONDecoder().decode([JFQuest].self, from: databaseData)
             print("Decoded \(quests.count) quests")
+            
+            print("Decoding Chapters...")
+            let chapters: [JFChapter] = try JSONDecoder().decode([JFChapter].self, from: questLinesData)
+            print("Decoded \(chapters.count) chapters")
+            
+            // Assign chapters to quests
+            for chapter in chapters {
+                for quest in chapter.quests {
+                    let i = quests.firstIndex { (q: JFQuest) -> Bool in
+                        return q.questID == quest.questID
+                    }
+                    if let _ = i {
+                        quests[i!].chapter = chapter
+                    }
+                }
+            }
+            
             return quests
             
         } catch let e as NSError {

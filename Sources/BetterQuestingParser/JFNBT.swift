@@ -8,13 +8,22 @@
 import Foundation
 
 /// Represents a set of NBT tags
-public class JFNBT: Codable, CustomStringConvertible {
+public struct JFNBT: Decodable, CustomStringConvertible {
+    
+    // To support NBT data from blockbreak tasks, override the init to check for "nbt" keys as well
+    
+    let data: [String: JFNestedDictionary]?
     
     public var description: String {
-        return "NBT Tag"
+        return data?.description ?? ""
     }
     
-    public required init(from decoder: Decoder) throws {
-        
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        self.data = try container.decode([String: JFNestedDictionary].self)
+        print("Created a NBT tag with data: \(data?.description ?? "None")")
     }
+    
+    private enum CodingKeys: CodingKey {}
+    
 }

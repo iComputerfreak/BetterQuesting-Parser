@@ -8,7 +8,7 @@
 import Foundation
 
 /// Represents a quest with an ID, prerequisites, tasks, rewards and properties
-public struct JFQuest: Decodable {
+public class JFQuest: Decodable {
     
     /// The unique ID of the quest
     public let questID: Int
@@ -25,16 +25,14 @@ public struct JFQuest: Decodable {
     /// The properties of this quest
     public let properties: JFProperties
     
-    /// Contains the name stored in the betterQuestingProperties
-    public var name: String {
-        return properties.betterQuestingProperties.name
-    }
+    /// The chapter information of this quest
+    public var chapter: JFChapter?
     
     /// Creates a new instance by decoding from the given decoder.
     ///
     /// - Parameter decoder: The decoder to read from
     /// - Throws: if reading from the decoder fails, or if the data read is corrupted or otherwise invalid.
-    public init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         questID = try container.decode(Int.self, forKey: .questID)
