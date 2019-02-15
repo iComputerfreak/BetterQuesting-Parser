@@ -7,4 +7,5 @@ You can then for example export the data using another format, put it into a MyS
 
 Contains a module that creates an HTML table out from the quest rewards.
 [Demo for the Awakening Modpack](https://jonasfrey.de/awakening/rewards.html)
+
 [Stylesheet used for the Demo](https://gist.github.com/iComputerfreak/b056e5486b91b218e0350904c5849f82)
